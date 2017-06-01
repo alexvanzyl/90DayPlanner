@@ -1,0 +1,19 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Rubik');
+
+// Settings
+@import 'settings';
+
+// Import Foundation and Font Awesome
+@import "node_modules/foundation-sites/scss/foundation";
+@import "node_modules/font-awesome/scss/font-awesome";
+
+// Include everything from foundation and
+// use flex-grid for our grid system.
+@include foundation-everything($flex: true);
+
+// Components
+@import "components/callout";
+
+// Helpers
+@import "helpers";

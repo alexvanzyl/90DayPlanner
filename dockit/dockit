@@ -1,0 +1,120 @@
+#!/bin/bash
+
+# Define the compose file to use.
+COMPOSE="docker-compose -f docker-compose.yml"
+
+
+# Run php artisan command in the php container
+function artisan()
+{   
+    if [[ $1 == artisan ]]; then
+        shift
+        $COMPOSE run --rm $TTY \
+            -u 1000:1000 \
+            -w /var/www/html \
+            php \
+            php artisan "$@"
+    else
+        shift
+        $COMPOSE exec \
+            --user 1000:1000 \
+            php \
+            php artisan "$@"
+    fi
+    
+    exit
+}
+
+
+# Run composer command in the php container.
+function composer()
+{
+    shift
+    $COMPOSE run --rm $TTY \
+        -u 1000:1000 \
+        -w /var/www/html \
+        php \
+        composer $@
+
+    exit
+}
+
+
+# Run phpunit command in the php container.
+function test()
+{
+    if [[ $1 == "test" ]]; then
+        shift
+        $COMPOSE run --rm $TTY \
+            -w /var/www/html \
+            php \
+            ./vendor/bin/phpunit $@
+    else
+        # Run phpunit command in the php container already running.
+        shift
+        $COMPOSE exec \
+        php \
+        sh -c "cd /var/www/html && ./vendor/bin/phpunit $@"
+    fi
+    exit
+}
+
+
+# Install laravel relative to the containers work directory. 
+function install_laravel()
+{
+    shift
+    $COMPOSE run --rm $TTY \
+        -w /var/www/html \
+        -u 1000:1000 \
+        php \
+        composer create-project --prefer-dist laravel/laravel $@
+    
+    $COMPOSE rm -f applications
+    exit
+}
+
+
+# Simply prints out the commands available to run.
+function usage()
+{
+    echo "Usage: ./dockit [command]"
+    echo
+    echo "Commands:"
+    echo "  artisan|art                 Run php artisan in a php container."
+    echo "                              If php container is already running, use art it's faster."
+    echo "  composer                    Run composer in a php container."
+    echo "  test|t                      Run phpunit in a php container. "
+    echo "                              If php container is already running, use t it's faster."
+    echo "  install-laravel <folder>    Same as running composer create-project --prefer-dist laravel/laravel <folder>"
+    echo
+    echo "  Optionally to run any docker-compose command just use ./dockit [command] i.e ./dockit ps"
+}
+
+# Catch the command and run it.
+case $1 in
+    (artisan|art)   
+        artisan $@
+        ;;
+    (composer)   
+        composer $@
+        ;;
+    (install-laravel)   
+        install_laravel $@
+        ;;
+    (test|t)   
+        test $@
+        ;;
+    (-h | --help | "")
+        usage
+        exit
+        ;;
+    ("")
+        usage
+        exit
+        ;;
+    (*)   
+        $COMPOSE $@
+        exit
+        ;;
+esac

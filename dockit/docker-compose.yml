@@ -1,0 +1,107 @@
+version: '2'
+
+services:
+  applications:
+    image: tianon/true
+    volumes:
+      - ${APP_PATH}:/var/www/html
+
+  nginx:
+    build:
+      context: ./nginx
+    image: justdockit/nginx
+    volumes_from:
+      - applications
+    ports:
+      - "${NGINX_HOST_HTTP_PORT}:80"
+    networks:
+      - justdockit_network
+
+  php:
+    build:
+      context: ./php
+      args:
+        - INSTALL_XDEBUG=${PHP_INSTALL_XDEBUG}
+        - INSTALL_PHPREDIS=${PHP_INSTALL_PHPREDIS}
+    image: justdockit/php
+    volumes_from:
+      - applications
+    networks:
+      - justdockit_network
+
+  node:
+    build:
+      context: ./node
+    image: justdockit/node
+    volumes_from:
+      - applications
+    networks:
+      - justdockit_network
+
+  mariadb:
+    build:
+      context: ./mariadb
+    image: justdockit/mariadb
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    ports:
+      - "${MARIADB_PORT}:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MARIADB_ROOT_PASSWORD}"
+      MYSQL_DATABASE: "${MARIADB_DATABASE}"
+      MYSQL_USER: "${MARIADB_USER}"
+      MYSQL_PASSWORD: "${MARIADB_PASSWORD}"
+    networks:
+      - justdockit_network
+
+  redis:
+    image: redis:alpine
+    volumes:
+      - redis_data:/data
+    networks:
+      - justdockit_network
+
+  beanstalkd:
+    build:
+      context: ./beanstalkd
+    image: justdockit/beanstalkd
+    volumes:
+      - beanstalkd_data:/var/lib/beanstalkd/data
+    networks:
+      - justdockit_network
+
+  beanstalkd_console:
+    build:
+      context: ./beanstalkd_console
+    image: justdockit/beanstalkd_console
+    ports:
+      - "${BEANSTALKD_CONSOLE_PORT}:2080"
+    networks:
+      - justdockit_network
+
+  phpmyadmin:
+      image: phpmyadmin/phpmyadmin
+      environment:
+        PMA_HOST: "mariadb"
+        PMA_USER: "root"
+        PMA_PASSWORD: "${MARIADB_ROOT_PASSWORD}"
+      ports:
+        - "${PMA_PORT}:80"
+      volumes:
+        - pma_session:/sessions
+      networks:
+        - justdockit_network
+
+networks:
+  justdockit_network:
+    driver: "bridge"
+
+volumes:
+  mariadb_data:
+    driver: "local"
+  redis_data:
+    driver: "local"
+  beanstalkd_data:
+    driver: "local"
+  pma_session:
+    driver: "local"

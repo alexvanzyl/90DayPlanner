@@ -1,0 +1,47 @@
+// Default background color for the callout header
+$callout-header-background: $secondary-color !default;
+
+// mixin to automatically set the header size
+@mixin callout-header-size($margin) {
+  margin-top: -$margin !important;
+  margin-right: -$margin !important;
+  margin-bottom: $margin !important;
+  margin-left: -$margin !important;
+
+  padding-left: $margin;
+  padding-right: $margin;
+  padding-bottom: $margin / 2;
+  padding-top: $margin / 2;
+}
+
+// mixin to set the headers style
+@mixin callout-header-style($color) {
+  background-color: $color;
+  color: color-pick-contrast($color, ($callout-font-color, $callout-font-color-alt));
+  border-top-left-radius: $callout-radius;
+  border-top-right-radius: $callout-radius;
+}
+
+.callout-header {
+  @include callout-header-size(1rem);
+  @include callout-header-style($callout-header-background);
+
+  // loop through each color in our palette and
+  // create the header style from that color
+  // usage: .callout-header [.primary|.secondary|.success] etc.
+  @each $name, $color in $foundation-palette {
+    &.#{$name} {
+      @include callout-header-style($color);
+    }
+  }
+
+  // Adjust the header size according to the
+  // size set on the parent class .callout
+  .callout.small & {
+    @include callout-header-size(0.5rem);
+  }
+
+  .callout.large & {
+    @include callout-header-size(3rem);
+  }
+}
