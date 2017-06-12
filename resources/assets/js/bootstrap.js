@@ -2,13 +2,14 @@
 window._ = require('lodash');
 
 /**
- * We'll load jQuery and foundation sites.
+ * We'll load jQuery and Foundation.
  */
 
 try {
-    window.$ = window.jQuery = require('jquery');
+  window.$ = window.jQuery = require('jquery');
 
-    require('foundation-sites');
+  require('foundation-sites');
+  $(document).foundation();
 } catch (e) {}
 
 /**

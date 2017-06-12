@@ -119,9 +119,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  mounted: function mounted() {
+    Foundation.Motion.animateIn(this.$el, 'slide-in-left fast');
+  },
+
+
   methods: {
     next: function next() {
-      this.$store.dispatch('goToNextStep');
+      var _this = this;
+
+      Foundation.Motion.animateOut(this.$el, 'slide-out-right fast', function () {
+        _this.$store.dispatch('goToNextStep');
+      });
     }
   }
 });
@@ -149,7 +158,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "callout-header"
-  }, [_c('h4', [_vm._v("Focus area")]), _vm._v(" "), _c('p', [_vm._v("What area you would like to focus on within the next 90 days?")])])
+  }, [_c('h4', [_vm._v("Focus area")]), _vm._v(" "), _c('p', [_vm._v("What area would you like to focus on within the next 90 days?")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "input-group"
@@ -161,7 +170,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "input-group-field",
     attrs: {
       "type": "text",
-      "placeholder": "Title for your focus area"
+      "placeholder": "Title of your focus area"
     }
   })])
 }]}

@@ -4,6 +4,9 @@
 
     <div class="row align-center">
       <div class="column large-8">
+        <router-link class="mb-5 block" :to="{ name: 'home' }">
+          <i class="fa fa-home"></i> Home
+        </router-link>
         <router-view></router-view>
       </div>
     </div>

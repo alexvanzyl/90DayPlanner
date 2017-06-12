@@ -8,9 +8,15 @@
 @import "node_modules/foundation-sites/scss/foundation";
 @import "node_modules/font-awesome/scss/font-awesome";
 
+// Import Motion UI
+@import "node_modules/motion-ui/src/motion-ui";
+
 // Include everything from foundation and
 // use flex-grid for our grid system.
 @include foundation-everything($flex: true);
+
+// Include all Motion UI transitions.
+@include motion-ui-transitions;
 
 // Components
 @import "components/callout";

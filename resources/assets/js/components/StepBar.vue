@@ -79,7 +79,7 @@
         content: '';
         position: absolute;
         background-color: $medium-gray;
-        top: rem-calc(15px);;
+        top: rem-calc(15px);
         left: -50%;
         z-index: -1;
       }
@@ -91,7 +91,7 @@
       &.done {
         color: $success-color;
         > a {
-          color: $success-color
+          color: $success-color;
         }
 
         &::before {
@@ -102,7 +102,7 @@
         &::after {
           background-color: scale-color($success-color, $lightness: 25%);
         }
-      },
+      }
 
       &.active {
         color: $primary-color;

@@ -6,13 +6,44 @@
     </div>
 
     <form @submit.prevent="save">
-      <div class="input-group">
-        <span class="input-group-label"><i class="fa fa-list"></i></span>
-        <input class="input-group-field" type="text">
-        <div class="input-group-button">
-          <button type="button" class="button"><i class="fa fa-plus"></i></button>
+      <div class="row" v-for="(action, index) in actions">
+        <div class="medium-6 small-12 columns">
+          <div class="input-group">
+            <span class="input-group-label"><i class="fa fa-list"></i></span>
+            <input class="input-group-field" type="text" placeholder="Action..." v-model="action.name" v-focus>
+          </div>
+        </div>
+
+        <div class="medium-6 small-12 columns">
+          <div class="input-group">
+            <span class="input-group-label"><i class="fa fa-user"></i></span>
+            <input class="input-group-field"
+                   type="text"
+                   placeholder="Who will perform the action?"
+                   v-model="action.person_responsible"
+            >
+            <div class="input-group-button">
+              <button type="button"
+                      class="button alert"
+                      title="Remove action"
+                      v-show="actions.length > 1"
+                      @click="remove(index)"
+              >
+                <i class="fa fa-minus"></i>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
+
+      <button type="button"
+              class="button expanded tiny warning"
+              title="Add another action"
+              @click="add"
+      >
+        <i class="fa fa-plus"></i>
+      </button>
+      <hr>
 
       <button class="button expanded" type="submit">Done</button>
     </form>
@@ -21,9 +52,29 @@
 
 <script>
   export default {
+    data() {
+      return {
+        actions: [{ name: '', person_responsible: '' }]
+      }
+    },
+
+    mounted() {
+      Foundation.Motion.animateIn(this.$el, 'slide-in-left fast');
+    },
+
     methods: {
       save() {
-        alert('Saving...')
+        alert('Saving...');
+      },
+
+      add() {
+        this.actions.push({ name: '', person_responsible: ''});
+      },
+
+      remove(index) {
+        if (this.actions.length > 1) {
+          this.actions.splice(index, 1)
+        }
       }
     }
   }

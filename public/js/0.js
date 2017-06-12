@@ -211,6 +211,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 
@@ -233,7 +236,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(40)();
-exports.push([module.i, "\n.step-bar {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  margin: 0;\n  padding: 0;\n  counter-reset: step;\n  text-align: center;\n  margin-bottom: 1rem;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-flow: row wrap;\n          flex-flow: row wrap;\n}\n.step-bar li {\n    color: #cacaca;\n    list-style-type: none;\n    font-size: 0.75rem;\n    text-transform: uppercase;\n    position: relative;\n    -webkit-box-flex: 1;\n        -ms-flex: 1 0 auto;\n            flex: 1 0 auto;\n}\n.step-bar li > a.disabled {\n      color: #cacaca;\n      cursor: not-allowed;\n}\n.step-bar li::before {\n      display: block;\n      color: #cacaca;\n      width: 1.875rem;\n      height: 1.875rem;\n      content: counter(step);\n      counter-increment: step;\n      line-height: 1.6875rem;\n      border: 0.125rem solid #cacaca;\n      text-align: center;\n      margin: 0 auto 10px auto;\n      border-radius: 50%;\n      background-color: #fefefe;\n}\n.step-bar li::after {\n      width: 100%;\n      height: 0.125rem;\n      content: '';\n      position: absolute;\n      background-color: #cacaca;\n      top: 0.9375rem;\n      left: -50%;\n      z-index: -1;\n}\n.step-bar li:first-child:after {\n      content: none;\n}\n.step-bar li.done {\n      color: #3adb76;\n}\n.step-bar li.done > a {\n        color: #3adb76;\n}\n.step-bar li.done::before {\n        color: #3adb76;\n        border-color: #6be498;\n}\n.step-bar li.done::after {\n        background-color: #6be498;\n}\n.step-bar li, .step-bar li.active {\n      color: #1779ba;\n}\n.step-bar li ::before, .step-bar li.active::before {\n        color: #1779ba;\n        border-color: #36a0e6;\n}\n.step-bar li ::after, .step-bar li.active::after {\n        background-color: #36a0e6;\n}\n", ""]);
+exports.push([module.i, "\n.step-bar {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  margin: 0;\n  padding: 0;\n  counter-reset: step;\n  text-align: center;\n  margin-bottom: 1rem;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-flow: row wrap;\n          flex-flow: row wrap;\n}\n.step-bar li {\n    color: #cacaca;\n    list-style-type: none;\n    font-size: 0.75rem;\n    text-transform: uppercase;\n    position: relative;\n    -webkit-box-flex: 1;\n        -ms-flex: 1 0 auto;\n            flex: 1 0 auto;\n}\n.step-bar li > a.disabled {\n      color: #cacaca;\n      cursor: not-allowed;\n}\n.step-bar li::before {\n      display: block;\n      color: #cacaca;\n      width: 1.875rem;\n      height: 1.875rem;\n      content: counter(step);\n      counter-increment: step;\n      line-height: 1.6875rem;\n      border: 0.125rem solid #cacaca;\n      text-align: center;\n      margin: 0 auto 10px auto;\n      border-radius: 50%;\n      background-color: #fefefe;\n}\n.step-bar li::after {\n      width: 100%;\n      height: 0.125rem;\n      content: '';\n      position: absolute;\n      background-color: #cacaca;\n      top: 0.9375rem;\n      left: -50%;\n      z-index: -1;\n}\n.step-bar li:first-child:after {\n      content: none;\n}\n.step-bar li.done {\n      color: #3adb76;\n}\n.step-bar li.done > a {\n        color: #3adb76;\n}\n.step-bar li.done::before {\n        color: #3adb76;\n        border-color: #6be498;\n}\n.step-bar li.done::after {\n        background-color: #6be498;\n}\n.step-bar li.active {\n      color: #1779ba;\n}\n.step-bar li.active::before {\n        color: #1779ba;\n        border-color: #36a0e6;\n}\n.step-bar li.active::after {\n        background-color: #36a0e6;\n}\n", ""]);
 
 /***/ }),
 
@@ -288,7 +291,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "row align-center"
   }, [_c('div', {
     staticClass: "column large-8"
-  }, [_c('router-view')], 1)])], 1)
+  }, [_c('router-link', {
+    staticClass: "mb-5 block",
+    attrs: {
+      "to": {
+        name: 'home'
+      }
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-home"
+  }), _vm._v(" Home\n      ")]), _vm._v(" "), _c('router-view')], 1)])], 1)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {

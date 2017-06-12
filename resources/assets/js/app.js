@@ -11,6 +11,11 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+// Register a global custom directive called v-focus
+Vue.directive('focus', {
+  inserted: (el) => el.focus()
+})
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

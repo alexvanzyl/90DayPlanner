@@ -10527,7 +10527,6 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
 
 // Initialize VueRouter
 /* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
-  //mode: 'history',
   routes: [{
     path: '/',
     name: 'home',
@@ -10610,6 +10609,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 __webpack_require__(30);
 
 window.Vue = __webpack_require__(2);
+
+// Register a global custom directive called v-focus
+Vue.directive('focus', {
+  inserted: function inserted(el) {
+    return el.focus();
+  }
+});
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -11478,13 +11484,14 @@ module.exports = function spread(callback) {
 window._ = __webpack_require__(34);
 
 /**
- * We'll load jQuery and foundation sites.
+ * We'll load jQuery and Foundation.
  */
 
 try {
   window.$ = window.jQuery = __webpack_require__(33);
 
   __webpack_require__(32);
+  $(document).foundation();
 } catch (e) {}
 
 /**
@@ -11539,8 +11546,10 @@ if (token) {
 
 
 
+// Make sure Vue is using Vuex
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */]);
 
+// Initialize Vuex Store
 /* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
   state: {
     currentStepRoute: '',
@@ -11548,26 +11557,63 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
   },
 
   mutations: {
+    /**
+     * Set the steps array on the state.
+     *
+     * @param state
+     * @param steps
+     * @constructor
+     */
     SET_STEPS: function SET_STEPS(state, steps) {
       state.steps = steps;
       state.currentStepRoute = steps[0].route;
     },
+
+
+    /**
+     * Update the currentStepRoute property on the state.
+     *
+     * @param state
+     * @param route
+     * @constructor
+     */
     UPDATE_CURRENT_STEP_ROUTE: function UPDATE_CURRENT_STEP_ROUTE(state, route) {
       state.currentStepRoute = route;
     }
   },
 
   actions: {
+    /**
+     * Set the steps on the state.
+     *
+     * @param commit
+     * @param steps
+     */
     setSteps: function setSteps(_ref, steps) {
       var commit = _ref.commit;
 
       commit('SET_STEPS', steps);
     },
+
+
+    /**
+     * Update the current step route.
+     *
+     * @param commit
+     * @param route
+     */
     updateCurrentStepRoute: function updateCurrentStepRoute(_ref2, route) {
       var commit = _ref2.commit;
 
       commit('UPDATE_CURRENT_STEP_ROUTE', route);
     },
+
+
+    /**
+     * Go to the next step.
+     *
+     * @param state
+     */
     goToNextStep: function goToNextStep(_ref3) {
       var state = _ref3.state;
 

@@ -119,11 +119,60 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      actions: [{ name: '', person_responsible: '' }]
+    };
+  },
+  mounted: function mounted() {
+    Foundation.Motion.animateIn(this.$el, 'slide-in-left fast');
+  },
+
+
   methods: {
     save: function save() {
       alert('Saving...');
+    },
+    add: function add() {
+      this.actions.push({ name: '', person_responsible: '' });
+    },
+    remove: function remove(index) {
+      if (this.actions.length > 1) {
+        this.actions.splice(index, 1);
+      }
     }
   }
 });
@@ -143,38 +192,117 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         _vm.save($event)
       }
     }
-  }, [_vm._m(1), _vm._v(" "), _c('button', {
+  }, [_vm._l((_vm.actions), function(action, index) {
+    return _c('div', {
+      staticClass: "row"
+    }, [_c('div', {
+      staticClass: "medium-6 small-12 columns"
+    }, [_c('div', {
+      staticClass: "input-group"
+    }, [_vm._m(1, true), _vm._v(" "), _c('input', {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: (action.name),
+        expression: "action.name"
+      }, {
+        name: "focus",
+        rawName: "v-focus"
+      }],
+      staticClass: "input-group-field",
+      attrs: {
+        "type": "text",
+        "placeholder": "Action..."
+      },
+      domProps: {
+        "value": (action.name)
+      },
+      on: {
+        "input": function($event) {
+          if ($event.target.composing) { return; }
+          action.name = $event.target.value
+        }
+      }
+    })])]), _vm._v(" "), _c('div', {
+      staticClass: "medium-6 small-12 columns"
+    }, [_c('div', {
+      staticClass: "input-group"
+    }, [_vm._m(2, true), _vm._v(" "), _c('input', {
+      directives: [{
+        name: "model",
+        rawName: "v-model",
+        value: (action.person_responsible),
+        expression: "action.person_responsible"
+      }],
+      staticClass: "input-group-field",
+      attrs: {
+        "type": "text",
+        "placeholder": "Who will perform the action?"
+      },
+      domProps: {
+        "value": (action.person_responsible)
+      },
+      on: {
+        "input": function($event) {
+          if ($event.target.composing) { return; }
+          action.person_responsible = $event.target.value
+        }
+      }
+    }), _vm._v(" "), _c('div', {
+      staticClass: "input-group-button"
+    }, [_c('button', {
+      directives: [{
+        name: "show",
+        rawName: "v-show",
+        value: (_vm.actions.length > 1),
+        expression: "actions.length > 1"
+      }],
+      staticClass: "button alert",
+      attrs: {
+        "type": "button",
+        "title": "Remove action"
+      },
+      on: {
+        "click": function($event) {
+          _vm.remove(index)
+        }
+      }
+    }, [_c('i', {
+      staticClass: "fa fa-minus"
+    })])])])])])
+  }), _vm._v(" "), _c('button', {
+    staticClass: "button expanded tiny warning",
+    attrs: {
+      "type": "button",
+      "title": "Add another action"
+    },
+    on: {
+      "click": _vm.add
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-plus"
+  })]), _vm._v(" "), _c('hr'), _vm._v(" "), _c('button', {
     staticClass: "button expanded",
     attrs: {
       "type": "submit"
     }
-  }, [_vm._v("Done")])])])
+  }, [_vm._v("Done")])], 2)])
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "callout-header primary"
   }, [_c('h4', [_vm._v("Action Steps")]), _vm._v(" "), _c('p', [_vm._v("What actions need to be taken to achieve your goal?")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "input-group"
-  }, [_c('span', {
+  return _c('span', {
     staticClass: "input-group-label"
   }, [_c('i', {
     staticClass: "fa fa-list"
-  })]), _vm._v(" "), _c('input', {
-    staticClass: "input-group-field",
-    attrs: {
-      "type": "text"
-    }
-  }), _vm._v(" "), _c('div', {
-    staticClass: "input-group-button"
-  }, [_c('button', {
-    staticClass: "button",
-    attrs: {
-      "type": "button"
-    }
+  })])
+},function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('span', {
+    staticClass: "input-group-label"
   }, [_c('i', {
-    staticClass: "fa fa-plus"
-  })])])])
+    staticClass: "fa fa-user"
+  })])
 }]}
 module.exports.render._withStripped = true
 if (false) {
