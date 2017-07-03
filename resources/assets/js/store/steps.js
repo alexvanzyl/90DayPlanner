@@ -16,7 +16,6 @@ export default {
      */
     SET_STEPS (state, steps) {
       state.steps = steps;
-      //state.currentStepRoute = steps[0].route;
     },
 
     /**
