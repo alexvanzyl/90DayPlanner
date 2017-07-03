@@ -20,7 +20,8 @@
     },
 
     created() {
-      this.$store.dispatch('setSteps', this.steps)
+      this.$store.dispatch('setSteps', this.steps);
+      this.$store.dispatch('updateCurrentStepRoute', this.$route.name);
     },
 
     watch: {

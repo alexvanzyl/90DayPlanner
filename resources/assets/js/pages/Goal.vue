@@ -9,7 +9,11 @@
       <label>What area would you like to focus on?</label>
       <div class="input-group">
         <span class="input-group-label"><i class="fa fa-trophy"></i></span>
-        <input class="input-group-field" type="text" placeholder="Title of your focus area">
+        <input class="input-group-field"
+               type="text"
+               placeholder="Title of your focus area"
+               v-model="name"
+        >
       </div>
 
       <button class="button expanded" type="submit" @click.prevent="next">Next</button>
@@ -28,6 +32,18 @@
         Foundation.Motion.animateOut(this.$el, 'slide-out-right fast', () => {
           this.$store.dispatch('goToNextStep');
         });
+      }
+    },
+
+    computed: {
+      name: {
+        get() {
+          return this.$store.state.goal.name;
+        },
+
+        set(name) {
+          this.$store.dispatch('updateGoalName', name);
+        }
       }
     }
   }

@@ -1,13 +1,13 @@
 webpackJsonp([3],{
 
-/***/ 43:
+/***/ 45:
 /***/ (function(module, exports, __webpack_require__) {
 
-var Component = __webpack_require__(46)(
+var Component = __webpack_require__(48)(
   /* script */
-  __webpack_require__(50),
+  __webpack_require__(52),
   /* template */
-  __webpack_require__(56),
+  __webpack_require__(58),
   /* scopeId */
   null,
   /* cssModules */
@@ -35,7 +35,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 46:
+/***/ 48:
 /***/ (function(module, exports) {
 
 // this module is a runtime utility for cleaner component module output and will
@@ -93,11 +93,15 @@ module.exports = function normalizeComponent (
 
 /***/ }),
 
-/***/ 50:
+/***/ 52:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
 //
 //
 //
@@ -132,18 +136,52 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this.$store.dispatch('goToNextStep');
       });
     }
+  },
+
+  computed: {
+    name: {
+      get: function get() {
+        return this.$store.state.goal.name;
+      },
+      set: function set(name) {
+        this.$store.dispatch('updateGoalName', name);
+      }
+    }
   }
 });
 
 /***/ }),
 
-/***/ 56:
+/***/ 58:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "secondary callout shadow"
-  }, [_vm._m(0), _vm._v(" "), _c('form', [_c('label', [_vm._v("What area would you like to focus on?")]), _vm._v(" "), _vm._m(1), _vm._v(" "), _c('button', {
+  }, [_vm._m(0), _vm._v(" "), _c('form', [_c('label', [_vm._v("What area would you like to focus on?")]), _vm._v(" "), _c('div', {
+    staticClass: "input-group"
+  }, [_vm._m(1), _vm._v(" "), _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.name),
+      expression: "name"
+    }],
+    staticClass: "input-group-field",
+    attrs: {
+      "type": "text",
+      "placeholder": "Title of your focus area"
+    },
+    domProps: {
+      "value": (_vm.name)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.name = $event.target.value
+      }
+    }
+  })]), _vm._v(" "), _c('button', {
     staticClass: "button expanded",
     attrs: {
       "type": "submit"
@@ -160,18 +198,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "callout-header"
   }, [_c('h4', [_vm._v("Focus area")]), _vm._v(" "), _c('p', [_vm._v("What area would you like to focus on within the next 90 days?")])])
 },function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {
-    staticClass: "input-group"
-  }, [_c('span', {
+  return _c('span', {
     staticClass: "input-group-label"
   }, [_c('i', {
     staticClass: "fa fa-trophy"
-  })]), _vm._v(" "), _c('input', {
-    staticClass: "input-group-field",
-    attrs: {
-      "type": "text",
-      "placeholder": "Title of your focus area"
-    }
   })])
 }]}
 module.exports.render._withStripped = true

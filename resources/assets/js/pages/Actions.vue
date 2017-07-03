@@ -52,29 +52,36 @@
 
 <script>
   export default {
-    data() {
-      return {
-        actions: [{ name: '', person_responsible: '' }]
-      }
-    },
-
     mounted() {
       Foundation.Motion.animateIn(this.$el, 'slide-in-left fast');
     },
 
     methods: {
       save() {
+        this.updateState();
         alert('Saving...');
       },
 
       add() {
+        this.updateState();
         this.actions.push({ name: '', person_responsible: ''});
       },
 
       remove(index) {
         if (this.actions.length > 1) {
-          this.actions.splice(index, 1)
+          this.actions.splice(index, 1);
+          this.updateState();
         }
+      },
+
+      updateState() {
+        this.$store.dispatch('updateActions', this.actions);
+      }
+    },
+
+    computed: {
+      actions() {
+        return this.$store.state.goal.actions;
       }
     }
   }
