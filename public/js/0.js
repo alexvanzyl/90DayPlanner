@@ -1,6 +1,6 @@
 webpackJsonp([0],{
 
-/***/ 40:
+/***/ 42:
 /***/ (function(module, exports) {
 
 /*
@@ -57,14 +57,14 @@ module.exports = function() {
 
 /***/ }),
 
-/***/ 42:
+/***/ 44:
 /***/ (function(module, exports, __webpack_require__) {
 
-var Component = __webpack_require__(46)(
+var Component = __webpack_require__(48)(
   /* script */
-  __webpack_require__(49),
+  __webpack_require__(51),
   /* template */
-  __webpack_require__(55),
+  __webpack_require__(57),
   /* scopeId */
   null,
   /* cssModules */
@@ -92,7 +92,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 46:
+/***/ 48:
 /***/ (function(module, exports) {
 
 // this module is a runtime utility for cleaner component module output and will
@@ -150,7 +150,7 @@ module.exports = function normalizeComponent (
 
 /***/ }),
 
-/***/ 47:
+/***/ 49:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -178,6 +178,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   created: function created() {
     this.$store.dispatch('setSteps', this.steps);
+    this.$store.dispatch('updateCurrentStepRoute', this.$route.name);
   },
 
 
@@ -192,12 +193,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 49:
+/***/ 51:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_StepBar__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_StepBar__ = __webpack_require__(56);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_StepBar___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_StepBar__);
 //
 //
@@ -232,26 +233,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 53:
+/***/ 55:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(40)();
+exports = module.exports = __webpack_require__(42)();
 exports.push([module.i, "\n.step-bar {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  margin: 0;\n  padding: 0;\n  counter-reset: step;\n  text-align: center;\n  margin-bottom: 1rem;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-flow: row wrap;\n          flex-flow: row wrap;\n}\n.step-bar li {\n    color: #cacaca;\n    list-style-type: none;\n    font-size: 0.75rem;\n    text-transform: uppercase;\n    position: relative;\n    -webkit-box-flex: 1;\n        -ms-flex: 1 0 auto;\n            flex: 1 0 auto;\n}\n.step-bar li > a.disabled {\n      color: #cacaca;\n      cursor: not-allowed;\n}\n.step-bar li::before {\n      display: block;\n      color: #cacaca;\n      width: 1.875rem;\n      height: 1.875rem;\n      content: counter(step);\n      counter-increment: step;\n      line-height: 1.6875rem;\n      border: 0.125rem solid #cacaca;\n      text-align: center;\n      margin: 0 auto 10px auto;\n      border-radius: 50%;\n      background-color: #fefefe;\n}\n.step-bar li::after {\n      width: 100%;\n      height: 0.125rem;\n      content: '';\n      position: absolute;\n      background-color: #cacaca;\n      top: 0.9375rem;\n      left: -50%;\n      z-index: -1;\n}\n.step-bar li:first-child:after {\n      content: none;\n}\n.step-bar li.done {\n      color: #3adb76;\n}\n.step-bar li.done > a {\n        color: #3adb76;\n}\n.step-bar li.done::before {\n        color: #3adb76;\n        border-color: #6be498;\n}\n.step-bar li.done::after {\n        background-color: #6be498;\n}\n.step-bar li.active {\n      color: #1779ba;\n}\n.step-bar li.active::before {\n        color: #1779ba;\n        border-color: #36a0e6;\n}\n.step-bar li.active::after {\n        background-color: #36a0e6;\n}\n", ""]);
 
 /***/ }),
 
-/***/ 54:
+/***/ 56:
 /***/ (function(module, exports, __webpack_require__) {
 
 
 /* styles */
-__webpack_require__(61)
+__webpack_require__(63)
 
-var Component = __webpack_require__(46)(
+var Component = __webpack_require__(48)(
   /* script */
-  __webpack_require__(47),
+  __webpack_require__(49),
   /* template */
-  __webpack_require__(58),
+  __webpack_require__(60),
   /* scopeId */
   null,
   /* cssModules */
@@ -279,7 +280,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 55:
+/***/ 57:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -312,7 +313,7 @@ if (false) {
 
 /***/ }),
 
-/***/ 58:
+/***/ 60:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -346,17 +347,17 @@ if (false) {
 
 /***/ }),
 
-/***/ 61:
+/***/ 63:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(53);
+var content = __webpack_require__(55);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(62)("42f444bb", content, false);
+var update = __webpack_require__(64)("42f444bb", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -373,7 +374,7 @@ if(false) {
 
 /***/ }),
 
-/***/ 62:
+/***/ 64:
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -392,7 +393,7 @@ if (typeof DEBUG !== 'undefined' && DEBUG) {
   ) }
 }
 
-var listToStyles = __webpack_require__(63)
+var listToStyles = __webpack_require__(65)
 
 /*
 type StyleObject = {
@@ -595,7 +596,7 @@ function applyToTag (styleElement, obj) {
 
 /***/ }),
 
-/***/ 63:
+/***/ 65:
 /***/ (function(module, exports) {
 
 /**

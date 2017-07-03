@@ -41,12 +41,6 @@
 
 <script>
   export default {
-    data() {
-      return {
-        metrics: [{ name: '' }]
-      }
-    },
-
     mounted() {
       Foundation.Motion.animateIn(this.$el, 'slide-in-left fast');
     },
@@ -54,18 +48,31 @@
     methods: {
       next() {
         Foundation.Motion.animateOut(this.$el, 'slide-out-right fast', () => {
+          this.updateState();
           this.$store.dispatch('goToNextStep');
         });
       },
 
       add() {
+        this.updateState();
         this.metrics.push({ name: '' });
       },
 
       remove(index) {
         if (this.metrics.length > 1) {
           this.metrics.splice(index, 1)
+          this.updateState();
         }
+      },
+
+      updateState() {
+        this.$store.dispatch('updateMetrics', this.metrics);
+      }
+    },
+
+    computed: {
+      metrics() {
+        return this.$store.state.goal.metrics;
       }
     }
   }

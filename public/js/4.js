@@ -1,13 +1,13 @@
 webpackJsonp([4],{
 
-/***/ 41:
+/***/ 43:
 /***/ (function(module, exports, __webpack_require__) {
 
-var Component = __webpack_require__(46)(
+var Component = __webpack_require__(48)(
   /* script */
-  __webpack_require__(48),
+  __webpack_require__(50),
   /* template */
-  __webpack_require__(57),
+  __webpack_require__(59),
   /* scopeId */
   null,
   /* cssModules */
@@ -35,7 +35,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 46:
+/***/ 48:
 /***/ (function(module, exports) {
 
 // this module is a runtime utility for cleaner component module output and will
@@ -93,7 +93,7 @@ module.exports = function normalizeComponent (
 
 /***/ }),
 
-/***/ 48:
+/***/ 50:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -152,11 +152,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      actions: [{ name: '', person_responsible: '' }]
-    };
-  },
   mounted: function mounted() {
     Foundation.Motion.animateIn(this.$el, 'slide-in-left fast');
   },
@@ -164,22 +159,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   methods: {
     save: function save() {
+      this.updateState();
       alert('Saving...');
     },
     add: function add() {
+      this.updateState();
       this.actions.push({ name: '', person_responsible: '' });
     },
     remove: function remove(index) {
       if (this.actions.length > 1) {
         this.actions.splice(index, 1);
+        this.updateState();
       }
+    },
+    updateState: function updateState() {
+      this.$store.dispatch('updateActions', this.actions);
+    }
+  },
+
+  computed: {
+    actions: function actions() {
+      return this.$store.state.goal.actions;
     }
   }
 });
 
 /***/ }),
 
-/***/ 57:
+/***/ 59:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
