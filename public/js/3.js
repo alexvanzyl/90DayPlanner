@@ -132,8 +132,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     next: function next() {
       var _this = this;
 
-      Foundation.Motion.animateOut(this.$el, 'slide-out-right fast', function () {
-        _this.$store.dispatch('goToNextStep');
+      this.$store.dispatch('saveGoal', this.name).then(function () {
+        Foundation.Motion.animateOut(_this.$el, 'slide-out-right fast', function () {
+          _this.$store.dispatch('goToNextStep');
+        });
+      }).catch(function (errors) {
+        return console.log(errors);
       });
     }
   },

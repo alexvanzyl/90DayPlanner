@@ -6,6 +6,7 @@ Vue.use(VueRouter);
 
 // Initialize VueRouter
 export default new VueRouter({
+  mode: 'history',
   routes:[
     {
       path:'/',
@@ -34,6 +35,7 @@ export default new VueRouter({
           component: resolve => require(['./pages/Actions.vue'], resolve),
         }
       ]
-    }
+    },
+    { path: '*', redirect: '/' }
   ]
 });

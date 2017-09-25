@@ -1,6 +1,8 @@
 export default {
   state: {
+    id: null,
     name: '',
+    errors: [],
     actions: [{ name: '', person_responsible: '' }],
     metrics: [{ name: '' }],
   },
@@ -15,6 +17,10 @@ export default {
      */
     UPDATE_GOAL_NAME (state, name) {
       state.name = name;
+    },
+
+    UPDATE_GOAL_ID (state, id) {
+      state.id = id;
     },
 
     /**
@@ -49,6 +55,16 @@ export default {
      */
     updateGoalName({commit}, name) {
       commit('UPDATE_GOAL_NAME', name);
+    },
+
+    saveGoal({commit, state}, name) {
+      if (state.id) {
+        return axios.patch('/api/goal/' + state.id, { name });
+      }
+
+      return axios.post('/api/goal', { name }).then((response) => {
+        commit('UPDATE_GOAL_ID', response.data.id);
+      });
     },
 
     /**

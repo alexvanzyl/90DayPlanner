@@ -29,9 +29,13 @@
 
     methods: {
       next() {
-        Foundation.Motion.animateOut(this.$el, 'slide-out-right fast', () => {
-          this.$store.dispatch('goToNextStep');
-        });
+        this.$store.dispatch('saveGoal', this.name)
+        .then(() => {
+          Foundation.Motion.animateOut(this.$el, 'slide-out-right fast', () => {
+            this.$store.dispatch('goToNextStep');
+          });
+        })
+        .catch(errors => console.log(errors));
       }
     },
 

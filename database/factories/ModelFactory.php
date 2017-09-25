@@ -22,3 +22,25 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\Goal::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->numerify('Goal ##'),
+    ];
+});
+
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\GoalMetric::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->numerify('Metric ##'),
+    ];
+});
+
+/** @var \Illuminate\Database\Eloquent\Factory $factory */
+$factory->define(App\GoalAction::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->numerify('Action ##'),
+        'person' => $faker->name,
+    ];
+});

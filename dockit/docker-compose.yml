@@ -9,13 +9,13 @@ services:
   nginx:
     build:
       context: ./nginx
-    image: justdockit/nginx
+    image: 90dayplanner/nginx
     volumes_from:
       - applications
     ports:
       - "${NGINX_HOST_HTTP_PORT}:80"
     networks:
-      - justdockit_network
+      - 90dayplanner_network
 
   php:
     build:
@@ -23,25 +23,25 @@ services:
       args:
         - INSTALL_XDEBUG=${PHP_INSTALL_XDEBUG}
         - INSTALL_PHPREDIS=${PHP_INSTALL_PHPREDIS}
-    image: justdockit/php
+    image: 90dayplanner/php
     volumes_from:
       - applications
     networks:
-      - justdockit_network
+      - 90dayplanner_network
 
   node:
     build:
       context: ./node
-    image: justdockit/node
+    image: 90dayplanner/node
     volumes_from:
       - applications
     networks:
-      - justdockit_network
+      - 90dayplanner_network
 
   mariadb:
     build:
       context: ./mariadb
-    image: justdockit/mariadb
+    image: 90dayplanner/mariadb
     volumes:
       - mariadb_data:/var/lib/mysql
     ports:
@@ -52,32 +52,32 @@ services:
       MYSQL_USER: "${MARIADB_USER}"
       MYSQL_PASSWORD: "${MARIADB_PASSWORD}"
     networks:
-      - justdockit_network
+      - 90dayplanner_network
 
   redis:
     image: redis:alpine
     volumes:
       - redis_data:/data
     networks:
-      - justdockit_network
+      - 90dayplanner_network
 
   beanstalkd:
     build:
       context: ./beanstalkd
-    image: justdockit/beanstalkd
+    image: 90dayplanner/beanstalkd
     volumes:
       - beanstalkd_data:/var/lib/beanstalkd/data
     networks:
-      - justdockit_network
+      - 90dayplanner_network
 
   beanstalkd_console:
     build:
       context: ./beanstalkd_console
-    image: justdockit/beanstalkd_console
+    image: 90dayplanner/beanstalkd_console
     ports:
       - "${BEANSTALKD_CONSOLE_PORT}:2080"
     networks:
-      - justdockit_network
+      - 90dayplanner_network
 
   phpmyadmin:
       image: phpmyadmin/phpmyadmin
@@ -90,10 +90,10 @@ services:
       volumes:
         - pma_session:/sessions
       networks:
-        - justdockit_network
+        - 90dayplanner_network
 
 networks:
-  justdockit_network:
+  90dayplanner_network:
     driver: "bridge"
 
 volumes:

@@ -11,6 +11,12 @@
 |
 */
 
-Route::get('/', function () {
+// Vue
+Route::any('{all}', function () {
     return view('index');
-});
+})->where(['all' => '(.*)?']);
+
+
+//Route::get('/', function () {
+//    return view('index');
+//});

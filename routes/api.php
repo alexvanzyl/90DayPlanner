@@ -16,3 +16,12 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('goal/{goal}', 'GoalsController@show');
+Route::post('goal', 'GoalsController@store');
+Route::patch('goal/{goal}', 'GoalsController@update');
+Route::delete('goal/{goal}', 'GoalsController@destroy');
+
+Route::post('goal/metrics', 'GoalMetricsController@store');
+
+Route::post('goal/actions', 'GoalActionsController@store');

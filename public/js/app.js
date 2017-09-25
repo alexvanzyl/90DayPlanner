@@ -133,7 +133,7 @@
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
+/******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// on error function for async loading
 /******/ 	__webpack_require__.oe = function(err) { console.error(err); throw err; };
@@ -10528,6 +10528,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
 
 // Initialize VueRouter
 /* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
+  mode: 'history',
   routes: [{
     path: '/',
     name: 'home',
@@ -10560,7 +10561,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
         return __webpack_require__.e/* require */(4).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(43)]; (resolve.apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
       }
     }]
-  }]
+  }, { path: '*', redirect: '/' }]
 }));
 
 /***/ }),
@@ -11541,7 +11542,9 @@ if (token) {
 "use strict";
 /* harmony default export */ __webpack_exports__["a"] = ({
   state: {
+    id: null,
     name: '',
+    errors: [],
     actions: [{ name: '', person_responsible: '' }],
     metrics: [{ name: '' }]
   },
@@ -11556,6 +11559,9 @@ if (token) {
      */
     UPDATE_GOAL_NAME: function UPDATE_GOAL_NAME(state, name) {
       state.name = name;
+    },
+    UPDATE_GOAL_ID: function UPDATE_GOAL_ID(state, id) {
+      state.id = id;
     },
 
 
@@ -11595,6 +11601,18 @@ if (token) {
 
       commit('UPDATE_GOAL_NAME', name);
     },
+    saveGoal: function saveGoal(_ref2, name) {
+      var commit = _ref2.commit,
+          state = _ref2.state;
+
+      if (state.id) {
+        return axios.patch('/api/goal/' + state.id, { name: name });
+      }
+
+      return axios.post('/api/goal', { name: name }).then(function (response) {
+        commit('UPDATE_GOAL_ID', response.data.id);
+      });
+    },
 
 
     /**
@@ -11603,8 +11621,8 @@ if (token) {
      * @param commit
      * @param metrics
      */
-    updateMetrics: function updateMetrics(_ref2, metrics) {
-      var commit = _ref2.commit;
+    updateMetrics: function updateMetrics(_ref3, metrics) {
+      var commit = _ref3.commit;
 
       commit('UPDATE_METRICS', metrics);
     },
@@ -11616,8 +11634,8 @@ if (token) {
      * @param commit
      * @param actions
      */
-    updateActions: function updateActions(_ref3, actions) {
-      var commit = _ref3.commit;
+    updateActions: function updateActions(_ref4, actions) {
+      var commit = _ref4.commit;
 
       commit('UPDATE_METRICS', actions);
     }
@@ -11648,7 +11666,6 @@ if (token) {
      */
     SET_STEPS: function SET_STEPS(state, steps) {
       state.steps = steps;
-      //state.currentStepRoute = steps[0].route;
     },
 
 
